@@ -1,29 +1,37 @@
-package com.example.sampleapp
+package com.example.sampleapp;
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
-class MainActivity : AppCompatActivity() {
-    private var clickCount = 0
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        // Bikin tampilan Dark Mode ala Binance
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setBackgroundColor(Color.parseColor("#181A20")); // Background gelap
+        layout.setPadding(60, 150, 60, 60);
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        TextView title = new TextView(this);
+        title.setText("HAM Private Exchange");
+        title.setTextColor(Color.parseColor("#EAECEF")); // Teks putih
+        title.setTextSize(26);
+        
+        TextView subtitle = new TextView(this);
+        subtitle.setText("Saldo Internal HAM:\n$100,000,000,000.00");
+        subtitle.setTextColor(Color.parseColor("#0ECB81")); // Teks hijau Binance
+        subtitle.setTextSize(20);
+        subtitle.setPadding(0, 50, 0, 0);
 
-        val welcomeText = findViewById<TextView>(R.id.welcomeText)
-        val clickButton = findViewById<Button>(R.id.clickButton)
-        val countText = findViewById<TextView>(R.id.countText)
+        layout.addView(title);
+        layout.addView(subtitle);
 
-        clickButton.setOnClickListener {
-            clickCount++
-            countText.text = "Button clicked $clickCount times"
-            
-            if (clickCount % 5 == 0) {
-                Toast.makeText(this, "Wow! You've clicked $clickCount times!", Toast.LENGTH_SHORT).show()
-            }
-        }
+        // Tampilkan layout ke layar
+        setContentView(layout);
     }
 }
